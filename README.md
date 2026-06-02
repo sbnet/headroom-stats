@@ -5,33 +5,6 @@ A real-time terminal dashboard for [Headroom](https://github.com/chopratejas/hea
 ![Rust](https://img.shields.io/badge/rust-1.75%2B-orange)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
-## What it shows
-
-```
- Headroom Stats  http://localhost:8787  ↻5s  2s ago
-┌ Résumé ──────────────────────────────────────────────────────────────┐
-│ Requêtes: 77   Mises en cache: 64   Échecs: 0   Limitées: 0         │
-│ Tokens: 810,270 → 644,688  (20.4% réduction)  Économisés: 165,582   │
-└──────────────────────────────────────────────────────────────────────┘
-┌ Par modèle ───────────────────────────────────────────────────────────┐
-│ Modèle                     Reqs  Tokens envoyés  Économisés  Réduct. │
-│ claude-sonnet-4-6            12      888,091       165,582    20.4%  │
-│ claude-haiku-4-5-20251001     1       12,450             0     0.0%  │
-└──────────────────────────────────────────────────────────────────────┘
-┌ Cache prefix ──────────────┐┌ Overhead ──────────────────────────────┐
-│ Lecture:  1,132,138        ││ Moy:  239ms                            │
-│ Écriture:   225,206        ││ Min:    7ms                            │
-│ Hit rate:     83.4%        ││ Max: 3,711ms                           │
-└────────────────────────────┘└────────────────────────────────────────┘
-┌ Content Router ────────────┐┌ TOIN Learning ─────────────────────────┐
-│ Compressé:   25  (7%)      ││ Patterns:      9                       │
-│ Exclu:       79 (21%)      ││ Compressions:  9                       │
-│ Ignoré:     259 (68%)      ││ Récupérations: 3 (33.3%)               │
-│ Inchangé:    18  (5%)      ││                                        │
-└────────────────────────────┘└────────────────────────────────────────┘
- [q] Quit   [r] Refresh now
-```
-
 ## Requirements
 
 - [Headroom](https://github.com/chopratejas/headroom) proxy running locally
@@ -49,7 +22,7 @@ Or build from source:
 git clone https://github.com/sbnet/headroom-stats
 cd headroom-stats
 cargo build --release
-./target/release/headroom-stats
+sudo cp ./target/release/headroom-stats /usr/bin/headroom-stats
 ```
 
 ## Usage

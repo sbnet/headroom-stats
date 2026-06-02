@@ -14,13 +14,13 @@ use app::{App, spawn_poller};
 use client::HeadroomClient;
 
 #[derive(Parser)]
-#[command(name = "headroom-stats", about = "TUI de statistiques temps réel pour le proxy Headroom")]
+#[command(name = "headroom-stats", about = "Real-time TUI dashboard for the Headroom proxy")]
 struct Args {
-    /// URL du proxy Headroom (par défaut: $ANTHROPIC_BASE_URL ou http://localhost:8787)
+    /// Headroom proxy URL (default: $ANTHROPIC_BASE_URL or http://localhost:8787)
     #[arg(long)]
     url: Option<String>,
 
-    /// Intervalle de rafraîchissement en secondes
+    /// Refresh interval in seconds
     #[arg(long, short, default_value = "5")]
     interval: u64,
 }

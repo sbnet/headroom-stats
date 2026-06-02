@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use reqwest::Client;
 
-use crate::model::StatsResponse;
+use crate::model::{HealthResponse, StatsHistoryResponse, StatsResponse};
 
 pub struct HeadroomClient {
     client: Client,
@@ -33,5 +33,43 @@ impl HeadroomClient {
         resp.json::<StatsResponse>()
             .await
             .context("failed to parse /stats response")
+    }
+
+    pub async fn fetch_stats_history(&self) -> Result<StatsHistoryResponse> {
+        let url = format!("{}/stats-history", self.base_url);
+        let resp = self
+            .client
+            .get(&url)
+            .send()
+            .await
+            .with_context(|| format!("failed to connect to {url}"))?;
+
+        let status = resp.status();
+        if !status.is_success() {
+            anyhow::bail!("server returned {status} for {url}");
+        }
+
+        resp.json::<StatsHistoryResponse>()
+            .await
+            .context("failed to parse /stats-history response")
+    }
+
+    pub async fn fetch_health(&self) -> Result<HealthResponse> {
+        let url = format!("{}/health", self.base_url);
+        let resp = self
+            .client
+            .get(&url)
+            .send()
+            .await
+            .with_context(|| format!("failed to connect to {url}"))?;
+
+        let status = resp.status();
+        if !status.is_success() {
+            anyhow::bail!("server returned {status} for {url}");
+        }
+
+        resp.json::<HealthResponse>()
+            .await
+            .context("failed to parse /health response")
     }
 }
