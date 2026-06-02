@@ -69,6 +69,88 @@ pub struct RouterStats {
     pub route_counts: HashMap<String, u64>,
 }
 
+// ── /stats-history ──────────────────────────────────────────────────────────
+
+#[derive(Debug, Deserialize, Default, Clone)]
+pub struct StatsHistoryResponse {
+    #[serde(default)]
+    pub display_session: DisplaySession,
+    #[serde(default)]
+    pub lifetime: LifetimeStats,
+    #[serde(default)]
+    pub history: Vec<HistoryPoint>,
+}
+
+#[derive(Debug, Deserialize, Default, Clone)]
+pub struct DisplaySession {
+    #[serde(default)]
+    pub requests: u64,
+    #[serde(default)]
+    pub tokens_saved: u64,
+    #[serde(default)]
+    pub compression_savings_usd: f64,
+    #[serde(default)]
+    pub total_input_tokens: u64,
+    #[serde(default)]
+    pub savings_percent: f64,
+    #[serde(default)]
+    pub started_at: String,
+    #[serde(default)]
+    pub last_activity_at: String,
+}
+
+#[derive(Debug, Deserialize, Default, Clone)]
+pub struct LifetimeStats {
+    #[serde(default)]
+    pub requests: u64,
+    #[serde(default)]
+    pub tokens_saved: u64,
+    #[serde(default)]
+    pub compression_savings_usd: f64,
+    #[serde(default)]
+    pub total_input_tokens: u64,
+    #[serde(default)]
+    pub total_input_cost_usd: f64,
+}
+
+#[derive(Debug, Deserialize, Default, Clone)]
+pub struct HistoryPoint {
+    #[serde(default)]
+    pub total_tokens_saved: u64,
+    #[serde(default)]
+    pub compression_savings_usd: f64,
+}
+
+// ── /health ─────────────────────────────────────────────────────────────────
+
+#[derive(Debug, Deserialize, Default, Clone)]
+pub struct HealthResponse {
+    #[serde(default)]
+    pub version: String,
+    #[serde(default)]
+    pub uptime_seconds: f64,
+    #[serde(default)]
+    pub config: Option<ProxyConfig>,
+    #[serde(default)]
+    pub rust_core: String,
+}
+
+#[derive(Debug, Deserialize, Default, Clone)]
+pub struct ProxyConfig {
+    #[serde(default)]
+    pub backend: String,
+    #[serde(default)]
+    pub optimize: bool,
+    #[serde(default)]
+    pub cache: bool,
+    #[serde(default)]
+    pub rate_limit: bool,
+    #[serde(default)]
+    pub memory: bool,
+    #[serde(default)]
+    pub learn: bool,
+}
+
 /// Extracts a f64 from a nested JSON value by dot-separated path.
 pub fn jval_f64(v: &Value, path: &str) -> f64 {
     path.split('.').fold(Some(v), |acc, key| acc?.get(key))
