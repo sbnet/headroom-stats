@@ -14,7 +14,7 @@ use app::{App, spawn_poller};
 use client::HeadroomClient;
 
 #[derive(Parser)]
-#[command(name = "headroom-stats", about = "Real-time TUI dashboard for the Headroom proxy")]
+#[command(name = "headroom-stats", about = "Real-time TUI dashboard for the Headroom proxy", version)]
 struct Args {
     /// Headroom proxy URL (default: $ANTHROPIC_BASE_URL or http://localhost:8787)
     #[arg(long)]
