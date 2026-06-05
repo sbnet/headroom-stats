@@ -67,6 +67,15 @@ The displayed metrics mirror what `headroom perf` reports from logs, but sourced
 - **[reqwest](https://docs.rs/reqwest)** — HTTP client
 - **[clap](https://docs.rs/clap)** — CLI argument parsing
 
+# Release workflow
+
+```
+# 1. Bump the version in Cargo.toml
+# 2. Commit + tag
+git tag vX.Y.Z
+git push origin vX.Y.Z
+```
+
 ## License
 
 MIT
