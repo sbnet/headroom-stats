@@ -75,7 +75,17 @@ The displayed metrics mirror what `headroom perf` reports from logs, but sourced
 git tag vX.Y.Z
 git push origin vX.Y.Z
 ```
+## Contribution Guidelines
+
+- Prefer small, focused pull requests.
+- Keep changes pragmatic: small diffs, clear manual checks, explicit commit messages.
+- Do not commit secrets or credentials in plain text.
+- If you change deployment behavior, update this README.
+
+## Security
+
+If you identify a vulnerability or unsafe infra/deployment practice, open a private issue or contact the maintainer before public disclosure.
 
 ## License
 
-MIT
+This project is licensed under MIT. See [LICENSE](LICENSE).
