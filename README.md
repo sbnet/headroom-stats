@@ -8,21 +8,23 @@ A real-time terminal dashboard for [Headroom](https://github.com/chopratejas/hea
 ## Requirements
 
 - [Headroom](https://github.com/chopratejas/headroom) proxy running locally
-- Rust 1.75+
 
 ## Installation
 
 ```bash
-cargo install --git https://github.com/sbnet/headroom-stats
+curl -fsSL https://raw.githubusercontent.com/sbnet/headroom-stats/main/install.sh | bash
 ```
 
-Or build from source:
+This downloads a pre-built binary for your platform (Linux x86/arm64, macOS Intel/Apple Silicon) to `~/.local/bin`. Re-run to update.
 
+**Custom install dir:**
 ```bash
-git clone https://github.com/sbnet/headroom-stats
-cd headroom-stats
-cargo build --release
-sudo cp ./target/release/headroom-stats /usr/bin/headroom-stats
+INSTALL_DIR=/usr/local/bin curl -fsSL https://raw.githubusercontent.com/sbnet/headroom-stats/main/install.sh | bash
+```
+
+**Build from source** (requires Rust 1.75+):
+```bash
+cargo install --git https://github.com/sbnet/headroom-stats
 ```
 
 ## Usage

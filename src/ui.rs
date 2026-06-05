@@ -164,14 +164,30 @@ fn render_summary(frame: &mut Frame, app: &App, area: Rect) {
 
         // Line 2: lifetime totals
         let lt = &hist.lifetime;
+        let lt_pct = if lt.total_input_tokens + lt.tokens_saved > 0 {
+            lt.tokens_saved as f64 / (lt.total_input_tokens + lt.tokens_saved) as f64 * 100.0
+        } else {
+            0.0
+        };
+        let lt_pct_color = if lt_pct >= 15.0 {
+            Color::Green
+        } else if lt_pct >= 5.0 {
+            Color::Yellow
+        } else {
+            Color::White
+        };
         lines.push(Line::from(vec![
             label("All-time "),
             val(fmt_num(lt.requests)),
             dim(" reqs  "),
             val(fmt_num(lt.tokens_saved)),
             dim(" tokens saved  "),
+            Span::styled(
+                format!("{:.1}%", lt_pct),
+                Style::default().fg(lt_pct_color).add_modifier(Modifier::BOLD),
+            ),
+            dim("  compression "),
             good(format!("~${:.2}", lt.compression_savings_usd)),
-            dim(" compression savings"),
         ]));
     }
 
